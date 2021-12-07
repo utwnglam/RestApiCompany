@@ -40,4 +40,15 @@ public class CompanyController {
     return companyDatabase.create(company);
   }
 
+  @PutMapping("/{id}")
+  public Company editCompany(@PathVariable Integer id, @RequestBody Company updatedCompany) {
+    Company company = companyDatabase.findById(id);
+    if (updatedCompany.getCompanyName() != null) {
+      company.setCompanyName(updatedCompany.getCompanyName());
+    }
+    if (updatedCompany.getEmployees() != null) {
+      company.setEmployees(updatedCompany.getEmployees());
+    }
+    return companyDatabase.edit(id, company);
+  }
 }

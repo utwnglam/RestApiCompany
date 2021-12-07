@@ -57,4 +57,10 @@ public class CompanyDatabase {
     return company;
   }
 
+  public Company edit(Integer id, Company updatedCompany) {
+    Company company = findById(id);
+    companies.remove(company);
+    companies.add(updatedCompany);
+    return updatedCompany;
+  }
 }
