@@ -32,4 +32,8 @@ public class CompanyDatabase {
       .findFirst()
       .orElseThrow(NoCompanyFoundException::new);
   }
+
+  public List<Employee> findEmployees(Integer id) {
+    return findById(id).getEmployees();
+  }
 }
