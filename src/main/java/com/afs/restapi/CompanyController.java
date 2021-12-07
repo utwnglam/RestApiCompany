@@ -51,4 +51,10 @@ public class CompanyController {
     }
     return companyDatabase.edit(id, company);
   }
+
+  @DeleteMapping("/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteCompany(@PathVariable Integer id) {
+    companyDatabase.delete(id);
+  }
 }
