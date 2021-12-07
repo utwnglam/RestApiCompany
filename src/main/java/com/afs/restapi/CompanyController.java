@@ -1,9 +1,6 @@
 package com.afs.restapi;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,4 +27,10 @@ public class CompanyController {
   public List<Employee> getCompanyEmployeesList(@PathVariable Integer id) {
     return companyDatabase.findEmployees(id);
   }
+
+  @GetMapping(params = {"page", "pageSize"})
+  public List<Company> getCompaniesByPage(@RequestParam Integer page, @RequestParam Integer pageSize) {
+    return companyDatabase.findByPageNumber(page, pageSize);
+  }
+
 }
