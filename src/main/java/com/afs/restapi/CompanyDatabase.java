@@ -39,9 +39,22 @@ public class CompanyDatabase {
   }
 
   public List<Company> findByPageNumber(Integer page, Integer pageSize) {
+    int pageToBeSkipped = page - 1;
     return companies.stream()
-      .skip((long) page * pageSize)
+      .skip((long) pageToBeSkipped * pageSize)
       .limit((long) pageSize)
       .collect(Collectors.toList());
   }
+
+  public Company create(Company company) {
+    int nextId = companies.stream()
+      .mapToInt(Company::getId)
+      .max()
+      .orElse(0) + 1;
+
+    company.setId(nextId);
+    companies.add(company);
+    return company;
+  }
+
 }

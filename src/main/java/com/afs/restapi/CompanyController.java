@@ -1,5 +1,6 @@
 package com.afs.restapi;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,6 +32,12 @@ public class CompanyController {
   @GetMapping(params = {"page", "pageSize"})
   public List<Company> getCompaniesByPage(@RequestParam Integer page, @RequestParam Integer pageSize) {
     return companyDatabase.findByPageNumber(page, pageSize);
+  }
+
+  @ResponseStatus(HttpStatus.CREATED)
+  @PostMapping
+  public Company createCompany(@RequestBody Company company) {
+    return companyDatabase.create(company);
   }
 
 }
